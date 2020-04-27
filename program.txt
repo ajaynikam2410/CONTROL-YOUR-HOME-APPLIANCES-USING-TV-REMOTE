@@ -1,0 +1,83 @@
+//* In our first sketch we will capture the unique codes sent when each button the remote is pressed. We’ll use the serial monitor to display them.
+
+// Include IR Remote Library by Ken Shirriff
+#include <IRremote.h>
+
+// Define sensor pin
+const int RECV_PIN = 4;
+
+// Define IR Receiver and Results Objects
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+
+void setup(){
+  // Serial Monitor @ 9600 baud
+  Serial.begin(9600);
+  // Enable the IR Receiver
+  irrecv.enableIRIn();
+}
+
+void loop(){
+  if (irrecv.decode(&results)){
+    // Print Code in HEX
+        Serial.println(results.value, HEX);
+        irrecv.resume();
+  }
+}
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
+ //* Control home appliances using Unused IR Remote keys
+
+
+
+// Include IR Remote Library by Ken Shirriff
+#include <IRremote.h>
+
+// Define sensor pin
+const int RECV_PIN = 4;
+
+// Define LED pin constants
+ 
+irrecv.resume(); 
+const int yellowPin = 7;
+
+// Define integer to remember toggle state
+int togglestate = 0;
+
+// Define IR Receiver and Results Objects
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+
+void setup(){
+  // Enable the IR Receiver
+  irrecv.enableIRIn();
+  // Set LED pins as Outputs
+  
+  pinMode(yellowPin, OUTPUT);
+}
+
+
+void loop(){
+    
+   
+          case 0xFE8A75: //Yellow Keypad Button
+        // Toggle LED On or Off
+        if(togglestate==0){
+        digitalWrite(yellowPin, HIGH);
+        togglestate=1;
+        }
+        else {
+        digitalWrite(yellowPin, LOW);
+        togglestate=0;
+        }
+        break;
+        
+    }
+    irrecv.resume(); 
+  }
+
+}
